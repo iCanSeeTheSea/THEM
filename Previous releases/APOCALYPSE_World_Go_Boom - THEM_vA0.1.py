@@ -1,6 +1,6 @@
 # APOCALYPSE: World Go Boom  - THEM vA0.1
 
-
+# © 2021 | read LICENSE for more details | 5985
 
 def apocalypse_world_go_boom(): 
     import time
