@@ -1,6 +1,7 @@
 # THEM vA0.3
 
-# © 2021 | read LICENSE for more details | 5985
+# Copyright (C) 2021
+
 
 # to do:
 # - fix health problem
