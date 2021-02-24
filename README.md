@@ -9,6 +9,8 @@ Further instructions will provided in the game
 
 For the game to work, you will need the latest version of python, which can be downloaded here: https://www.python.org/downloads/release/python-378/.
 
+Once you have both python and the game installed, choose open with python to play.
+
 ## License
 
 Please read the LICENSE file for terms and conditions: https://github.com/hellomeister3/THEM/blob/master/LICENSE
