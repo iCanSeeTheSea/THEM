@@ -1,5 +1,5 @@
-# APOCALYPSE_World_Go_Boom
-APOCALYPSE: World Go Boom is a text-based choose-your-path game, where you must fight your way through zombie hordes, struggle through deserts, and stay alive.
+# THEM
+THEM  is a text-based choose-your-path game, where you must fight your way through zombie hordes, struggle across deserts, and stay alive.
 
 ## How to play
 
@@ -11,4 +11,4 @@ For the game to work, you will need the latest version of python, which can be d
 
 ## License
 
-Please read the LICENSE file for terms and conditions: https://github.com/hellomeister3/APOCALYPSE_World_Go_Boom/blob/master/LICENSE
+Please read the LICENSE file for terms and conditions: 
