@@ -2,6 +2,7 @@
 
 # Copyright (C) 2021
 
+
 def apocalypse_world_go_boom(): 
     import time
     from random import randint
