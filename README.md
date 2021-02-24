@@ -11,4 +11,4 @@ For the game to work, you will need the latest version of python, which can be d
 
 ## License
 
-Please read the LICENSE file for terms and conditions: 
+Please read the LICENSE file for terms and conditions: https://github.com/hellomeister3/THEM/blob/master/LICENSE
