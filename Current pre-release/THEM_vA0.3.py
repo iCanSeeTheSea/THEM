@@ -4,7 +4,7 @@
 
 
 # to do:
-# - fix health problem
+# - fix health problem *
 # - make sure all fight sequences work
 # - finalise storyline
 # - randomise maze code every game???
@@ -91,7 +91,7 @@ print(f'health: {character_health}, speed: {character_speed}, hunger: {character
 # setting scenes to their abreviations 
 places = {'h': 'hunting cabin      ', 'a': 'tree house         ', 's': 'barracks           ','w': 'woods              ', 'ci': 'city               ', 'sr': 'archery range     ', 
 'mh': 'mess hall          ', 'av': 'abandoned village  ', 'rp': 'radioactive plains ', 'hd': 'halls of death     ', 'wh': 'witch\'s hut        ', 'ca': 'castle             ', 
-'d': 'desert             ', 'dt': 'temple             ', 'dtw': 'temple              ', 'd2': 'desert             ', 'F': 'FINISH!            ', 'ae': 'secret ending      '}
+'d': 'desert             ', 'dt': 'temple             ', 'dtw': 'temple              ', 'd2': 'desert             ', 'F': 'FINISH!            ', 'ae': 'secret ending      ', 'go': 'game over'}
 
 place = places[turn]
 turn_count = 1
@@ -181,8 +181,8 @@ def radioactive_plains():
     mutants = randint(5,9)
     print(f'you arrive on the radioactive plains, and are attacked by {mutants} mutants!'); print(''); time.sleep(0.5)
     # numebr of hits determined by speed
-    hits = randint(2, character_speed)
-    for i in range(mutants, hits):
+    hits = randint(5, character_speed)
+    for i in range(1, hits):
         input('type . to attack! '); print(''); time.sleep(0.3)
     # number of mutants killed determined by number of hits and attaack damage
     if hits > mutants and character_attack > 5:
@@ -230,7 +230,7 @@ def halls_of_death():
 
 def witches_hut():
     global max_health, character_health, character_speed
-    # 1 in 4 chance of witch arriving
+    # 1 in 2 chance of witch arriving
     witch = randint(1,2)
     print('you arrive at the witch\'s hut, and see that the witch is not there'); print(''); time.sleep(0.5)
     ingo = input('do you go in? y/n '); print(''); time.sleep(0.5)
@@ -539,7 +539,8 @@ def main():
             elif turn == 'ae':
                 secret_ending(); break
 
-        def stats_to_0(character_health, character_hunger, character_speed, character_attack):
+        def stats_to_0():
+            global character_attack, character_health, character_hunger, character_speed
             # unsures character's stats don't go below 0
             if character_health < 0:
                 character_health = 0
@@ -549,7 +550,7 @@ def main():
                 character_speed = 0
             if character_attack < 0:
                 character_attack = 0
-        stats_to_0(character_health, character_hunger, character_speed, character_attack)
+        stats_to_0()
         
         # end of turn stats
         print(f'end of turn {turn_count}. health: {character_health}, speed: {character_speed}, hunger: {character_hunger}, attack: {character_attack}, inventory: {inventory}'); print(''); time.sleep(1)
@@ -587,7 +588,7 @@ def main():
             character_speed -= 1
             character_attack -= 1
         
-        stats_to_0(character_health, character_hunger, character_speed, character_attack)
+        stats_to_0()
 
         # game ends if character speed runs out
         if character_speed <= 0:
