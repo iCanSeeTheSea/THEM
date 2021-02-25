@@ -27,7 +27,7 @@ print('''
     ---                                    ---
     --- Hunter(h): 10, 20, 15, 15          ---
     --- Archer(a): 15, 15, 10, 20          ---
-    --- Warrior(q): 20, 10, 10, 20         ---
+    --- Warrior(w): 20, 10, 10, 20         ---
     ---                                    ---
     ------------------------------------------
 
@@ -101,7 +101,7 @@ print(f'you wake up in your {place}, well rested and fed.'); print(''); time.sle
 print('you can\'t quite remember what heppend last night, or how you got home'); print(''); time.sleep(0.5)
 print('anyways, it\'s time for a new adventure!'); print(''); time.sleep(0.5)
 
-def woods(character_attack, character_health, character_hunger, character_speed):
+def woods():
     print('you are hunkered down in a shrub, looking out for any animal to cross your path'); print(''); time.sleep(0.5)
     print(f'you see movement from behind one of the trees and swing your {weapon} round to look'); print(''); time.sleep(0.5)
     print('but...'); print(''); time.sleep(0.5)
@@ -114,22 +114,22 @@ def woods(character_attack, character_health, character_hunger, character_speed)
     # choose next destination
     return(input('now with some food, you can either go to the city(ci) or the abandoned village(av) '))
 
-def city(character_attack, character_health, character_hunger, character_speed):
+def city():
     print('you arrive in the city, weaving your way past the rubble and shacks'); print(''); time.sleep(0.5)
     print('you notice more poeple around than usual, but you dismiss it'); print(''); time.sleep(0.5)
     # choose next destination
     return(input('you can either go to the shooting range(sr), the abandoned village(av), the woods(w) or the radioactive plains(rp)'))
 
-def archery_range(character_attack, character_health, character_hunger, character_speed):
-    print(f'you arrive at the shooting range {weapon} in hand'); print(''); time.sleep(0.5)
+def archery_range():
+    print(f'you arrive at the archery range and take a bow'); print(''); time.sleep(0.5)
     target = randint(2,7)
     print('you sidle up to the first platform, taking each shot in quick sucession'); print(''); time.sleep(0.5)
     print(f'you get {target} bullseyes!'); print(''); time.sleep(0.5)
     print('you notice that the targets have far more holes in than last week'); print(''); time.sleep(0.5)
     # choose next destination
-    return(input('you can either go to the mess hall(mh), the city(ci), the radioactive plains(rp) or the halls of death(hd)'))
+    return(input('you can either go to the food hall(fh), the city(ci), the radioactive plains(rp) or the halls of death(hd)'))
 
-def food_hall(character_attack, character_health, character_hunger, character_speed):
+def food_hall():
     print('you arrive at the mess hall, and jump for joy! the line is very small!'); print(''); time.sleep(0.5)
     # chance of 1 to 3 food
     meal = randint(1,3)
@@ -139,7 +139,8 @@ def food_hall(character_attack, character_health, character_hunger, character_sp
     # choose next destination
     return(input('you can either go to the shooting range(sr) or the halls of death(hd)'))
 
-def abandoned_village(character_attack, character_health, character_hunger, character_speed):
+def abandoned_village():
+    global character_attack, character_health, character_speed
     # 1 in 3 chance of being attacked
     attack = randint(1,3)
     if attack == 1:
@@ -169,7 +170,8 @@ def abandoned_village(character_attack, character_health, character_hunger, char
     # choose next destination
     return(input(' you can either go to the radioactive plains(rp), the witches hut(wh) or the desert(d)'))
 
-def radioactive_plains(character_attack, character_health, character_hunger, character_speed):
+def radioactive_plains():
+    global character_health, character_attack, character_speed
     # character must have more than 8 health to withstand the radiation 
     if character_health < 8:
         print('you arrive on the radioacctive plains, but you\'re too weak to withstand the radiation!'); print(''); time.sleep(0.5)
@@ -195,7 +197,8 @@ def radioactive_plains(character_attack, character_health, character_hunger, cha
     # choose next destination
     return(input('you can either go to the witches hut(wh) or the castle(ca)'))
 
-def halls_of_death(character_attack, character_health, character_hunger, character_speed):
+def halls_of_death():
+    global character_health, character_speed, character_attack
     print('you arrive in the halls of death and.. oh no...'); print(''); time.sleep(0.5)
     print('there are zombies everywhere!'); print(''); time.sleep(0.5)
     # 3 rounds of zombies to fight
@@ -225,10 +228,10 @@ def halls_of_death(character_attack, character_health, character_hunger, charact
     # choose next destination
     return(input(' you can either go to the radioactive plains(rp) or the castle(ca)'))
 
-def witches_hut(character_attack, character_health, character_hunger, character_speed):
-    global max_health
+def witches_hut():
+    global max_health, character_health, character_speed
     # 1 in 4 chance of witch arriving
-    witch = randint(1,4)
+    witch = randint(1,2)
     print('you arrive at the witch\'s hut, and see that the witch is not there'); print(''); time.sleep(0.5)
     ingo = input('do you go in? y/n '); print(''); time.sleep(0.5)
     # choice to go inside
@@ -270,7 +273,8 @@ def witches_hut(character_attack, character_health, character_hunger, character_
         print('you decide to stear this one clear, and head on towards the castle'); print(''); time.sleep(0.5)
         return('ca')
 
-def castle(character_attack, character_health, character_hunger, character_speed):
+def castle():
+    global character_speed, character_health
     print('you arrive at the castle, and are greeted by the guards'); print(''); time.sleep(0.5)
     # 1 in 7 chance of being turned away by guards
     guards = randint(1,7)
@@ -294,7 +298,8 @@ def castle(character_attack, character_health, character_hunger, character_speed
     # after the castle, the game ends
     return('F')
 
-def desert(character_attack, character_health, character_hunger, character_speed):
+def desert():
+    global character_health, character_speed
     print('you strip a layer in the sweltering heat of the desert sun'); print(''); time.sleep(0.5)
     print('the sun is causing heat waves to ripple across the horizon'); print(''); time.sleep(0.5)
     print('you see something in the distance'); print(''); time.sleep(0.5)
@@ -327,14 +332,15 @@ def desert(character_attack, character_health, character_hunger, character_speed
             character_health = 0
             return('go')
 
-def desert_temple(character_attack, character_health, character_hunger, character_speed):
+def desert_temple():
             print('you stumble into the temple, hot and tired from the desert'); print(''); time.sleep(0.5)
             print('you marvel at the architecture, but your awe is cut short...'); print(''); time.sleep(0.5)
             print('BANG'); print(''); time.sleep(0.5)
             print('darkness descends...'); print(''); time.sleep(0.5)
             return('dtw')
 
-def desert_temple_captured(character_attack, character_health, character_hunger, character_speed):
+def desert_temple_captured():
+    global character_hunger, character_speed
     for i in range(3):
         print('you wake up in a dark room'); print(''); time.sleep(0.5)
         print('you\'re blinded by a birght purple light'); print(''); time.sleep(0.5)
@@ -371,7 +377,8 @@ def desert_temple_captured(character_attack, character_health, character_hunger,
         print('you see a bright flash through your eyelids...'); print(''); time.sleep(1)
         return('F')
 
-def desert_2(character_attack, character_health, character_hunger, character_speed):
+def desert_2():
+    global character_hunger, character_speed
     print('hours pass...'); print(''); time.sleep(1)
     print('...you\'re tired and hungry'); print(''); time.sleep(1)
     character_hunger -= 4
@@ -386,15 +393,16 @@ def desert_2(character_attack, character_health, character_hunger, character_spe
     print('I totally know where the stroy goes from here'); print(''); time.sleep(0.5)
     return('ae')
 
-def finish_game(character_attack, character_health, character_hunger, character_speed):
+def finish_game():
     # game end sequence
     print('the explosion rips through the land, destroying everything in its path. '); print(''); time.sleep(1)
     print('if only you could have done something to stop it...'); print(''); time.sleep(1)
 
-def secret_ending(character_attack, character_health, character_hunger, character_speed):
+def secret_ending():
     print('um, well done ig'); print(''); time.sleep(1)
 
-def main(turn, character_attack, character_health, character_hunger, character_speed, turn_count, place, places):
+def main():
+    global turn, character_attack, character_health, character_hunger, character_speed, turn_count, place, places
     # main game loop
     while character_health > 0: 
         # keeps track of the turn
@@ -474,62 +482,62 @@ def main(turn, character_attack, character_health, character_hunger, character_s
 
             # woods
             elif turn == 'w':
-                turn = woods(character_attack, character_health, character_hunger, character_speed); print(''); time.sleep(0.5)
+                turn = woods(); print(''); time.sleep(0.5)
 
             # city
             elif turn == 'ci':
-                turn = city(character_attack, character_health, character_hunger, character_speed); print(''); time.sleep(0.5)
+                turn = city(); print(''); time.sleep(0.5)
 
             # archery range
             elif turn == 'sr':
-                turn = archery_range(character_attack, character_health, character_hunger, character_speed); print(''); time.sleep(0.5)
+                turn = archery_range(); print(''); time.sleep(0.5)
 
             # food hall
             elif turn == 'mh':
-                turn = food_hall(character_attack, character_health, character_hunger, character_speed); print(''); time.sleep(0.5)
+                turn = food_hall(); print(''); time.sleep(0.5)
 
             # abandoned village
             elif turn == 'av':
-                turn = abandoned_village(character_attack, character_health, character_hunger, character_speed); print(''); time.sleep(0.5)
+                turn = abandoned_village(); print(''); time.sleep(0.5)
 
             # radioactive plains
             elif turn == 'rp':
-                turn = radioactive_plains(character_attack, character_health, character_hunger, character_speed); print(''); time.sleep(0.5)
+                turn = radioactive_plains(); print(''); time.sleep(0.5)
 
             # halls of death
             elif turn == 'hd':
-                turn = halls_of_death(character_attack, character_health, character_hunger, character_speed); print(''); time.sleep(0.5)
+                turn = halls_of_death(); print(''); time.sleep(0.5)
 
             # witch's hut
             elif turn == 'wh':
-                turn = witches_hut(character_attack, character_health, character_hunger, character_speed); print(''); time.sleep(0.5)
+                turn = witches_hut(); print(''); time.sleep(0.5)
 
             # castle
             elif turn == 'ca':
-                turn = castle(character_attack, character_health, character_hunger, character_speed); print(''); time.sleep(0.5)
+                turn = castle(); print(''); time.sleep(0.5)
 
             # desert
             elif turn == 'd':
-                turn = desert(character_attack, character_health, character_hunger, character_speed); print(''); time.sleep(0.5)
+                turn = desert(); print(''); time.sleep(0.5)
             
             # temple (from desert)
             elif turn == 'dt':
-                turn = desert_temple(character_attack, character_health, character_hunger, character_speed); print(''); time.sleep(0.5)
+                turn = desert_temple(); print(''); time.sleep(0.5)
 
             # temple (once captured)
             elif turn == 'dtw':
-                turn = desert_temple_captured(character_attack, character_health, character_hunger, character_speed); print(''); time.sleep(0.5)
+                turn = desert_temple_captured(); print(''); time.sleep(0.5)
             
             elif turn == 'd2':
-                turn = desert_2(character_attack, character_health, character_hunger, character_speed); print(''); time.sleep(0.5)
+                turn = desert_2(); print(''); time.sleep(0.5)
 
             # finish
             elif turn == 'F':
-                finish_game(character_attack, character_health, character_hunger, character_speed); break
+                finish_game(); break
             
             # secret ending (shhhh)
             elif turn == 'ae':
-                secret_ending(character_attack, character_health, character_hunger, character_speed); break
+                secret_ending(); break
 
         def stats_to_0(character_health, character_hunger, character_speed, character_attack):
             # unsures character's stats don't go below 0
@@ -599,4 +607,4 @@ def main(turn, character_attack, character_health, character_hunger, character_s
     print('---            THEM              ---'); print(''); time.sleep(1)
 
 
-main(turn, character_attack, character_health, character_hunger, character_speed, turn_count, place, places)
+main()
