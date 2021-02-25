@@ -425,6 +425,9 @@ def main():
         # keeps track of the turn
         place = places[turn]
 
+        if turn == 'go':
+            print('--- GAME OVER ---'); print(''); time.sleep(0.5); break
+
         print(f'''
     -----------------------------------------  
     --- you are at the {place}---
@@ -437,9 +440,6 @@ def main():
     ---                                   ---
     -----------------------------------------      
         '''); print(''); time.sleep(1)
-
-        if turn == 'go':
-            print('--- GAME OVER ---'); break
 
         # start of turn stats
         print(f'start of turn {turn_count}. health: {character_health}, speed: {character_speed}, hunger: {character_hunger}, attack: {character_attack}, inventory: {inventory}'); print(''); time.sleep(1)
