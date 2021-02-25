@@ -4,10 +4,7 @@
 
 
 # to do:
-# - fix health problem *
-# - make sure all fight sequences work *
 # - finalise storyline
-# - randomise maze code every game???
 
 # importing libraries
 import time
@@ -625,6 +622,7 @@ while playing:
     play = input('start game y/n '); print(''); time.sleep(0.5)
 
     if play == 'y':
+        inventory = [] # clear the inventory
         # loading game
         print('--- starting game ---'); print(''); time.sleep(0.5)
         for i in range(1,4):
@@ -638,4 +636,3 @@ while playing:
         playing = False; quit
     else:
         pass
-            
