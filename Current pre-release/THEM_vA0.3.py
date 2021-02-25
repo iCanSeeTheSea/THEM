@@ -1,6 +1,6 @@
 # THEM vA0.3
 
-# Copyright (C) 2021
+# Copyright (C) 2021 | see LICENSE for terms and conditions
 
 
 # to do:
