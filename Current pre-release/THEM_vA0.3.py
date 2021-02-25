@@ -5,7 +5,7 @@
 
 # to do:
 # - fix health problem *
-# - make sure all fight sequences work
+# - make sure all fight sequences work *
 # - finalise storyline
 # - randomise maze code every game???
 
@@ -14,12 +14,33 @@ import time
 from random import randint
 
 # introduction
+print('errr story go here yay'); print(''); time.sleep(0.5)
+
+# defining variables
 character_health = 0
 chracter_speed = 0
 character_hunger = 0
 character_attack = 0
+max_health = 0
+max_hunger = 0
+max_attack = 0
+max_speed = 0
+turn = ''
+inventory = []
+turn_count = 0
+weapon = ''
+playing = True
 
-print('''
+# setting scenes to their abreviations 
+places = {'h': 'hunting cabin      ', 'a': 'tree house         ', 's': 'barracks           ','w': 'woods              ', 'ci': 'city               ', 'sr': 'archery range     ', 
+'mh': 'mess hall          ', 'av': 'abandoned village  ', 'rp': 'radioactive plains ', 'hd': 'halls of death     ', 'wh': 'witch\'s hut        ', 'ca': 'castle             ', 
+'d': 'desert             ', 'dt': 'temple             ', 'dtw': 'temple              ', 'd2': 'desert             ', 'F': 'FINISH!            ', 'ae': 'secret ending      ', 'go': 'game over'}
+
+
+
+def game_start():
+    global character_speed, character_hunger, character_health, character_attack, max_attack, max_health, max_hunger, max_speed, turn, turn_count, places, weapon, inventory
+    print('''
     ------------------------------------------
     --- CHARACTER TYPES:                   ---   
     ---                                    ---
@@ -31,75 +52,68 @@ print('''
     ---                                    ---
     ------------------------------------------
 
-'''); print(''); time.sleep(1)
-turn = ''
+    '''); print(''); time.sleep(1)
 
-while True: 
-    character_select = input('please choose a character: '); print(''); time.sleep(0.5)
-    print('you have chosen...'); print(''); time.sleep(0.5)
+    while True: 
+        character_select = input('please choose a character: '); print(''); time.sleep(0.5)
+        print('you have chosen...'); print(''); time.sleep(0.5)
 
-    # hunter character
-    if character_select == 'h':
-        print('hunter!'); print(''); time.sleep(0.5)
-        # sets attributes
-        max_health = 10
-        max_speed = 20
-        max_hunger = 15
-        max_attack = 15
-        weapon = 'axe'
-        turn = 'h'
-        break
-    
-    # archer character
-    elif character_select == 'a':
-        print('archer!'); print(''); time.sleep(0.5)
-        # sets attributes
-        max_health = 15
-        max_speed = 15
-        max_hunger = 10
-        max_attack = 20
-        weapon = 'bow'
-        turn = 'a'
-        break
-    
-    # warrior character
-    elif character_select == 'w':
-        print('warrior!'); print(''); time.sleep(0.5)
-        # sets attributes
-        max_health = 20
-        max_speed = 10
-        max_hunger = 10
-        max_attack = 20
-        weapon = 'sword'
-        turn = 's'
-        break
+        # hunter character
+        if character_select == 'h':
+            print('hunter!'); print(''); time.sleep(0.5)
+            # sets attributes
+            max_health = 10
+            max_speed = 20
+            max_hunger = 15
+            max_attack = 15
+            weapon = 'axe'
+            turn = 'h'
+            break
+        
+        # archer character
+        elif character_select == 'a':
+            print('archer!'); print(''); time.sleep(0.5)
+            # sets attributes
+            max_health = 15
+            max_speed = 15
+            max_hunger = 10
+            max_attack = 20
+            weapon = 'bow'
+            turn = 'a'
+            break
+        
+        # warrior character
+        elif character_select == 'w':
+            print('warrior!'); print(''); time.sleep(0.5)
+            # sets attributes
+            max_health = 20
+            max_speed = 10
+            max_hunger = 10
+            max_attack = 20
+            weapon = 'sword'
+            turn = 's'
+            break
 
-    else:
-        print('... that\'s not a valid character.'); print(''); time.sleep(3)
+        else:
+            print('... that\'s not a valid character.'); print(''); time.sleep(3)
 
+    # starting inventory
+    inventory.append(weapon)
 
-inventory = []
-inventory.append(weapon)
+    # starting stats
+    character_health = max_health
+    character_speed = max_speed
+    character_hunger = max_hunger
+    character_attack = max_attack
+    print(f'health: {character_health}, speed: {character_speed}, hunger: {character_hunger}, attack: {character_attack}, inventory: {inventory}'); print(''); time.sleep(0.5)
 
-# starting stats
-character_health = max_health
-character_speed = max_speed
-character_hunger = max_hunger
-character_attack = max_attack
-print(f'health: {character_health}, speed: {character_speed}, hunger: {character_hunger}, attack: {character_attack}, inventory: {inventory}'); print(''); time.sleep(0.5)
+    place = places[turn]
+    turn_count = 1
 
-# setting scenes to their abreviations 
-places = {'h': 'hunting cabin      ', 'a': 'tree house         ', 's': 'barracks           ','w': 'woods              ', 'ci': 'city               ', 'sr': 'archery range     ', 
-'mh': 'mess hall          ', 'av': 'abandoned village  ', 'rp': 'radioactive plains ', 'hd': 'halls of death     ', 'wh': 'witch\'s hut        ', 'ca': 'castle             ', 
-'d': 'desert             ', 'dt': 'temple             ', 'dtw': 'temple              ', 'd2': 'desert             ', 'F': 'FINISH!            ', 'ae': 'secret ending      ', 'go': 'game over'}
-
-place = places[turn]
-turn_count = 1
-
-# introduction sequence
-print(f'you wake up in your {place}, well rested and fed.'); print(''); time.sleep(0.5)
-print('you can\'t quite remember what heppend last night, or how you got home'); print(''); time.sleep(0.5)
-print('anyways, it\'s time for a new adventure!'); print(''); time.sleep(0.5)
+    # introduction sequence
+    print(f'you wake up in your {place}, well rested and fed.'); print(''); time.sleep(0.5)
+    print('you can\'t quite remember what heppend last night, or how you got home'); print(''); time.sleep(0.5)
+    print('anyways, it\'s time for a new adventure!'); print(''); time.sleep(0.5)
 
 def woods():
     print('you are hunkered down in a shrub, looking out for any animal to cross your path'); print(''); time.sleep(0.5)
@@ -403,6 +417,9 @@ def secret_ending():
 
 def main():
     global turn, character_attack, character_health, character_hunger, character_speed, turn_count, place, places
+
+    game_start()
+
     # main game loop
     while character_health > 0: 
         # keeps track of the turn
@@ -603,9 +620,22 @@ def main():
         # end of turn
         turn_count += 1 
 
-    # end message
-    print('---    THANK YOU FOR PLAYING:    ---'); print(''); time.sleep(1)
-    print('---            THEM              ---'); print(''); time.sleep(1)
+while playing:
 
+    play = input('start game y/n '); print(''); time.sleep(0.5)
 
-main()
+    if play == 'y':
+        # loading game
+        print('--- starting game ---'); print(''); time.sleep(0.5)
+        for i in range(1,4):
+            print('.'*i); print(''); time.sleep(0.5)
+        # running game loop
+        main()
+    elif play == 'n':
+        # end message
+        print('---    THANK YOU FOR PLAYING:    ---'); print(''); time.sleep(1)
+        print('---            THEM              ---'); print(''); time.sleep(3)
+        playing = False; quit
+    else:
+        pass
+            
