@@ -477,6 +477,14 @@ def main():
         print(f'start of turn {turn_count}. health: {character_health}, speed: {character_speed}, hunger: {character_hunger}, attack: {character_attack}, inventory: {inventory}'); print(''); time.sleep(1)
         action = input('what would you like to do? '); print(''); time.sleep(0.5)
 
+        # checks player enters a valid action
+        while True:
+            if action == 'f' or action == 'e' or action == 'r' or action == 'c':
+                break
+            else:
+                print(f'{turn} is not a valid action'); print(''); time.sleep(0.5)
+                action = input('what would you like to do? '); print(''); time.sleep(0.5)
+
         # lets player find food
         if action == 'f':
             forage = randint(1,4)
