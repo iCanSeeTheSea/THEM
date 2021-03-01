@@ -64,8 +64,8 @@ weapon = ''
 playing = True
 
 # setting scenes to their abreviations 
-places = {'h': 'hunting cabin      ', 'a': 'tree house         ', 's': 'barracks           ','w': 'woods              ', 'ci': 'city               ', 'sr': 'archery range     ', 
-'mh': 'mess hall          ', 'av': 'abandoned village  ', 'rp': 'radioactive plains ', 'hd': 'halls of death     ', 'wh': 'witch\'s hut        ', 'ca': 'castle             ', 
+places = {'h': 'hunting cabin      ', 'a': 'tree house         ', 's': 'barracks           ','w': 'woods              ', 'ci': 'city               ', 'ar': 'archery range      ', 
+'fh': 'food hall          ', 'av': 'abandoned village  ', 'rp': 'radioactive plains ', 'hd': 'halls of death     ', 'wh': 'witch\'s hut        ', 'ca': 'castle             ', 
 'd': 'desert             ', 'dt': 'temple             ', 'dtw': 'temple              ', 'd2': 'desert             ', 'F': 'FINISH!            ', 'ae': 'secret ending      ', 'go': 'game over'}
 
 
@@ -482,7 +482,7 @@ def main():
             if action == 'f' or action == 'e' or action == 'r' or action == 'c':
                 break
             else:
-                print(f'{turn} is not a valid action'); print(''); time.sleep(0.5)
+                print(f'{action} is not a valid action'); print(''); time.sleep(0.5)
                 action = input('what would you like to do? '); print(''); time.sleep(0.5)
 
         # lets player find food
@@ -552,7 +552,7 @@ def main():
                 turn = input('you can go to the archery range(ar) or the food hall(fh)'); print(''); time.sleep(0.5)
                 # checks player enters a valid destination
                 while True:
-                    if turn == 'sr' or turn == 'fh':
+                    if turn == 'ar' or turn == 'fh':
                         break
                     else:
                         print(f'{turn} is not a valid destination'); print(''); time.sleep(0.5)
