@@ -7,6 +7,7 @@
 import time
 from random import randint
 
+'''
 # introduction - runs when you start game -> change to only the first time game is run?
 print(''); time.sleep(0.5)
 print('everything is changing'); print(''); time.sleep(1)
@@ -37,6 +38,7 @@ print(''); print(''); time.sleep(1)
 print('Please'); print(''); time.sleep(1)
 print('Help me'); print(''); time.sleep(1)
 print(''); print(''); time.sleep(1)
+'''
 
 # game title
 print('''
@@ -162,7 +164,7 @@ def city():
     print('you arrive in the city, weaving your way past the rubble and shacks'); print(''); time.sleep(0.5)
     print('you notice more poeple around than usual, but you dismiss it'); print(''); time.sleep(0.5)
     # choose next destination
-    return(input('you can either go to the shooting range(sr), the abandoned village(av), the woods(w) or the radioactive plains(rp)'))
+    return(input('you can either go to the archery range(ar), the abandoned village(av), the woods(w) or the radioactive plains(rp)'))
 
 def archery_range():
     print(f'you arrive at the archery range and take a bow'); print(''); time.sleep(0.5)
@@ -181,7 +183,7 @@ def food_hall():
     for i in range(meal):
         inventory.append('food')
     # choose next destination
-    return(input('you can either go to the shooting range(sr) or the halls of death(hd)'))
+    return(input('you can either go to the archery range(ar) or the halls of death(hd)'))
 
 def abandoned_village():
     global character_attack, character_health, character_speed
@@ -518,50 +520,127 @@ def main():
             if turn == 'h':
                 # hunter starts in the hunting cabin
                 turn = input(' you can to go the woods(w), or the city(ci)'); print(''); time.sleep(0.5)
+                # checks player enters a valid destination
+                while True:
+                    if turn == 'w' or turn == 'ci':
+                        break
+                    else:
+                        print(f'{turn} is not a valid destination'); print(''); time.sleep(0.5)
+                        turn = input(' you can to go the woods(w), or the city(ci)'); print(''); time.sleep(0.5)
 
             elif turn == 'a':
                 # archer starts in the tree house
-                turn = input('you can go to the city(ci) or the shooting range(sr)'); print(''); time.sleep(0.5)
+                turn = input('you can go to the city(ci) or the archery range(ar)'); print(''); time.sleep(0.5)
+                # checks player enters a valid destination
+                while True:
+                    if turn == 'sr' or turn == 'ci':
+                        break
+                    else:
+                        print(f'{turn} is not a valid destination'); print(''); time.sleep(0.5)
+                        turn = input('you can go to the city(ci) or the shooting range(sr)'); print(''); time.sleep(0.5)
 
             elif turn == 's':
                 # soldier starts in the barracks
-                turn = input('you can go to the shooting range(sr) or the mess hall(mh)'); print(''); time.sleep(0.5)
-
+                turn = input('you can go to the archery range(ar) or the food hall(fh)'); print(''); time.sleep(0.5)
+                # checks player enters a valid destination
+                while True:
+                    if turn == 'sr' or turn == 'fh':
+                        break
+                    else:
+                        print(f'{turn} is not a valid destination'); print(''); time.sleep(0.5)
+                        turn = input('you can go to the archery range(ar) or the food hall(fh)'); print(''); time.sleep(0.5)
             # woods
             elif turn == 'w':
                 turn = woods(); print(''); time.sleep(0.5)
+                # checks player enters a valid destination
+                while True:
+                    if turn == 'ci' or turn == 'av':
+                        break
+                    else:
+                        print(f'{turn} is not a valid destination'); print(''); time.sleep(0.5)
+                        turn = input('you can either go to the city(ci) or the abandoned village(av)'); print(''); time.sleep(0.5)
 
             # city
             elif turn == 'ci':
                 turn = city(); print(''); time.sleep(0.5)
+                # checks player enters a valid destination
+                while True:
+                    if turn == 'ci' or turn == 'av' or turn == 'w' or turn == 'rp':
+                        break
+                    else:
+                        print(f'{turn} is not a valid destination'); print(''); time.sleep(0.5)
+                        turn = input('you can either go to the archery range(ar), the abandoned village(av), the woods(w) or the radioactive plains(rp)'); print(''); time.sleep(0.5)
 
             # archery range
-            elif turn == 'sr':
+            elif turn == 'ar':
                 turn = archery_range(); print(''); time.sleep(0.5)
+                # checks player enters a valid destination
+                while True:
+                    if turn == 'ci' or turn == 'fh' or turn == 'rp' or turn == 'hd':
+                        break
+                    else:
+                        print(f'{turn} is not a valid destination'); print(''); time.sleep(0.5)
+                        turn = input('you can either go to the food hall(fh), the city(ci), the radioactive plains(rp) or the halls of death(hd)'); print(''); time.sleep(0.5)
 
             # food hall
-            elif turn == 'mh':
+            elif turn == 'fh':
                 turn = food_hall(); print(''); time.sleep(0.5)
+                # checks player enters a valid destination
+                while True:
+                    if turn == 'ar' or turn == 'hd':
+                        break
+                    else:
+                        print(f'{turn} is not a valid destination'); print(''); time.sleep(0.5)
+                        turn = input('ou can either go to the archery range(ar) or the halls of death(hd)'); print(''); time.sleep(0.5)
 
             # abandoned village
             elif turn == 'av':
                 turn = abandoned_village(); print(''); time.sleep(0.5)
+                # checks player enters a valid destination
+                while True:
+                    if turn == 'rp' or turn == 'wh' or turn == 'd':
+                        break
+                    else:
+                        print(f'{turn} is not a valid destination'); print(''); time.sleep(0.5)
+                        turn = input('you can either go to the radioactive plains(rp), the witches hut(wh) or the desert(d)'); print(''); time.sleep(0.5)
 
             # radioactive plains
             elif turn == 'rp':
                 turn = radioactive_plains(); print(''); time.sleep(0.5)
+                # checks player enters a valid destination
+                while True:
+                    if turn == 'ca' or turn == 'wh':
+                        break
+                    else:
+                        print(f'{turn} is not a valid destination'); print(''); time.sleep(0.5)
+                        turn = input('you can either go to the witches hut(wh) or the castle(ca)'); print(''); time.sleep(0.5)
 
             # halls of death
             elif turn == 'hd':
                 turn = halls_of_death(); print(''); time.sleep(0.5)
+                # checks player enters a valid destination
+                while True:
+                    if turn == 'ca' or turn == 'rp':
+                        break
+                    else:
+                        print(f'{turn} is not a valid destination'); print(''); time.sleep(0.5)
+                        turn = input('you can either go to the radioactive plains(rp) or the castle(ca)'); print(''); time.sleep(0.5)
 
             # witch's hut
             elif turn == 'wh':
                 turn = witches_hut(); print(''); time.sleep(0.5)
+                # checks player enters a valid destination
+                while True:
+                    if turn == 'ca' or turn == 'd' or turn == 'dtw':
+                        break
+                    else:
+                        print(f'{turn} is not a valid destination'); print(''); time.sleep(0.5)
+                        turn = input('you can either go to the desert(d) or the castle(ca)'); print(''); time.sleep(0.5)
 
             # castle
             elif turn == 'ca':
                 turn = castle(); print(''); time.sleep(0.5)
+                # player doesn't input any more turn choices, so the turn does not need to be checked from here onwards
 
             # desert
             elif turn == 'd':
