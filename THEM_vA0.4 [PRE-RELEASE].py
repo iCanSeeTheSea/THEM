@@ -7,7 +7,7 @@
 import time
 from random import randint
 
-'''
+
 # introduction - runs when you start game -> change to only the first time game is run?
 print(''); time.sleep(0.5)
 print('everything is changing'); print(''); time.sleep(1)
@@ -38,7 +38,7 @@ print(''); print(''); time.sleep(1)
 print('Please'); print(''); time.sleep(1)
 print('Help me'); print(''); time.sleep(1)
 print(''); print(''); time.sleep(1)
-'''
+
 
 # game title
 print('''
