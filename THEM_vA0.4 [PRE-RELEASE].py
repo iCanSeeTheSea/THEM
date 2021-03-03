@@ -66,9 +66,7 @@ playing = True
 # setting scenes to their abreviations 
 places = {'h': 'hunting cabin      ', 'a': 'tree house         ', 's': 'barracks           ','w': 'woods              ', 'ci': 'city               ', 'ar': 'archery range      ', 
 'fh': 'food hall          ', 'av': 'abandoned village  ', 'rp': 'radioactive plains ', 'hd': 'halls of death     ', 'wh': 'witch\'s hut        ', 'ca': 'castle             ', 
-'d': 'desert             ', 'dt': 'temple             ', 'dtw': 'temple              ', 'd2': 'desert             ', 'F': 'FINISH!            ', 'ae': 'secret ending      ', 'go': 'game over'}
-
-
+'d': 'desert             ', 'dt': 'temple             ', 'dtw': 'temple              ', 'd2': 'desert             ', 'F': 'FINISH!            ', 'te': 'secret ending      ', 'go': 'game over'}
 
 def game_start():
     global character_speed, character_hunger, character_health, character_attack, max_attack, max_health, max_hunger, max_speed, turn, turn_count, places, weapon, inventory
@@ -437,12 +435,11 @@ def desert_2():
     print('wait... that doesn\'t look like the others...'); print(''); time.sleep(0.5)
     print('this will be the secret ending'); print(''); time.sleep(0.5)
     print('I totally know where the stroy goes from here'); print(''); time.sleep(0.5)
-    return('ae')
+    return('te')
 
 def finish_game():
     # game end sequence
-    print('the explosion rips through the land, destroying everything in its path. '); print(''); time.sleep(1)
-    print('if only you could have done something to stop it...'); print(''); time.sleep(1)
+    print('yay you finished'); print(''); time.sleep(1)
 
 def secret_ending():
     print('um, well done ig'); print(''); time.sleep(1)
@@ -670,7 +667,7 @@ def main():
                 finish_game(); break
             
             # secret ending (shhhh)
-            elif turn == 'ae':
+            elif turn == 'te':
                 secret_ending(); break
 
         def stats_to_0():
