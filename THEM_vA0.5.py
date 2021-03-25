@@ -17,11 +17,10 @@ info[1][1] = '1'
 print(info)
 
 def save_data(info):
-    with open('info.txt', 'w') as file:
-        info_writer = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+    with open('info.txt', 'w', newline='') as file:
+        info_writer = csv.writer(file)
         for i in range(len(info)):
             info_writer.writerow(info[i])
-            print(info[i], i)
 save_data(info)
 
 if info[0][1] == '0':
