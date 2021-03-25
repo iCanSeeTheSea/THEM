@@ -8,7 +8,7 @@ import time
 from random import randint
 import csv
 
-# fetching values from info.txt
+# fetching values from info.txt, adding to list 'info'
 info = []
 with open("info.txt", 'r') as file: info = list(csv.reader(file))
 
@@ -16,6 +16,7 @@ print(info)
 info[1][1] = '1'
 print(info)
 
+# writing the list 'info' back into info.txt, to save data
 def save_data(info):
     with open('info.txt', 'w', newline='') as file:
         info_writer = csv.writer(file)
