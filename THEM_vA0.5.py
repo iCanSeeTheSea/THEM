@@ -793,6 +793,6 @@ while playing:
         # end message
         print('---    THANK YOU FOR PLAYING:    ---'); print(''); time.sleep(1)
         print('---            THEM              ---'); print(''); time.sleep(1)
-        playing = False; quit
+        playing = False; info[1][1] = '1'; save_data(info); quit
     else:
         pass
