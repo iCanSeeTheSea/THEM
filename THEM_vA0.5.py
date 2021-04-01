@@ -12,10 +12,6 @@ import csv
 info = []
 with open("info.txt", 'r') as file: info = list(csv.reader(file))
 
-print(info)
-info[1][1] = '1'
-print(info)
-
 # writing the list 'info' back into info.txt, to save data
 def save_data(info):
     with open('info.txt', 'w', newline='') as file:
@@ -55,7 +51,7 @@ if info[0][1] == '0':
     print('Please'); print(''); time.sleep(1)
     print('Help me'); print(''); time.sleep(1)
     print(''); print(''); time.sleep(1)
-    info[0][1] = '1'; print(info)
+    info[0][1] = '1'; save_data(info)
 
 # game title
 print('''
