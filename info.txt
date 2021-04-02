@@ -1,2 +1,13 @@
-intro,0
-test,0
+intro,1
+test,null
+inventory
+"['axe', 'food', 'food', 'food']",axe,food,food,food
+character_speed,20
+character_hunger,14
+character_attack,15
+max_health,10
+max_hunger,15
+max_attack,15
+max_speed,20
+turn,av
+turn_count,6

@@ -8,17 +8,78 @@ import time
 from random import randint
 import csv
 
+# default variables
+character_health = 0
+character_speed = 0
+character_hunger = 0
+character_attack = 0
+max_health = 0
+max_hunger = 0
+max_attack = 0
+max_speed = 0
+turn = 'null'
+inventory = ['null']
+turn_count = 0
+weapon = inventory[0]
+playing = True
+
+# setting scenes to their abreviations 
+places = {'h': 'hunting cabin      ', 'a': 'tree house         ', 's': 'barracks           ','w': 'woods              ', 'ci': 'city               ', 'ar': 'archery range      ', 
+'fh': 'food hall          ', 'av': 'abandoned village  ', 'rp': 'radioactive plains ', 'hd': 'halls of death     ', 'wh': 'witch\'s hut        ', 'ca': 'castle             ', 
+'d': 'desert             ', 'dt': 'temple             ', 'dtw': 'temple              ', 'd2': 'desert             ', 'F': 'FINISH!            ', 'te': 'secret ending      ', 'go': 'game over'}
+
 # fetching values from info.txt, adding to list 'info'
 info = []
 with open("info.txt", 'r') as file: info = list(csv.reader(file))
 
 # writing the list 'info' back into info.txt, to save data
-def save_data(info):
+def save_data(info, inventory, turn, turn_count, character_attack, character_health, character_hunger, character_speed, max_attack, max_health, max_hunger, max_speed):
+
+
+    for i in range(len(info)):
+        if info[i][0] == 'inventory':
+            temp = [inventory]
+            print(temp)
+            for i in range(len(inventory)):
+                temp.append(inventory[i])
+            print(temp)
+            info[i] = (temp)
+        elif info[i][0] == 'character_health':
+            temp = ['character_health', character_health]
+            info[i] = (temp)
+        elif info[i][0] == 'character_speed':
+            temp = ['character_speed', character_speed]
+            info[i] = (temp)
+        elif info[i][0] == 'character_hunger':
+            temp = ['character_hunger', character_hunger]
+            info[i] = (temp)
+        elif info[i][0] == 'character_attack':
+            temp = ['character_attack', character_attack]
+            info[i] = (temp)
+        elif info[i][0] == 'max_health':
+            temp = ['max_health', max_health]
+            info[i] = (temp)
+        elif info[i][0] == 'max_hunger':
+            temp = ['max_hunger', max_hunger]
+            info[i] = (temp)
+        elif info[i][0] == 'max_speed':
+            temp = ['max_speed', max_speed]
+            info[i] = (temp) 
+        elif info[i][0] == 'max_attack':
+            temp = ['max_attack', max_attack]
+            info[i] = (temp)
+        elif info[i][0] == 'turn':
+            temp = ['turn', turn]
+            info[i] = (temp)
+        elif info[i][0] == 'turn_count':
+            temp = ['turn_count', turn_count]
+            info[i] = (temp)
+
+
     with open('info.txt', 'w', newline='') as file:
         info_writer = csv.writer(file)
         for i in range(len(info)):
             info_writer.writerow(info[i])
-save_data(info)
 
 if info[0][1] == '0':
     # introduction - runs when you start game for the first time
@@ -51,7 +112,7 @@ if info[0][1] == '0':
     print('Please'); print(''); time.sleep(1)
     print('Help me'); print(''); time.sleep(1)
     print(''); print(''); time.sleep(1)
-    info[0][1] = '1'; save_data(info)
+    info[0][1] = '1'
 
 # game title
 print('''
@@ -61,25 +122,7 @@ print('''
 '''); time.sleep(1)
 
 
-# defining variables
-character_health = 0
-chracter_speed = 0
-character_hunger = 0
-character_attack = 0
-max_health = 0
-max_hunger = 0
-max_attack = 0
-max_speed = 0
-turn = ''
-inventory = []
-turn_count = 0
-weapon = ''
-playing = True
 
-# setting scenes to their abreviations 
-places = {'h': 'hunting cabin      ', 'a': 'tree house         ', 's': 'barracks           ','w': 'woods              ', 'ci': 'city               ', 'ar': 'archery range      ', 
-'fh': 'food hall          ', 'av': 'abandoned village  ', 'rp': 'radioactive plains ', 'hd': 'halls of death     ', 'wh': 'witch\'s hut        ', 'ca': 'castle             ', 
-'d': 'desert             ', 'dt': 'temple             ', 'dtw': 'temple              ', 'd2': 'desert             ', 'F': 'FINISH!            ', 'te': 'secret ending      ', 'go': 'game over'}
 
 def game_start():
     global character_speed, character_hunger, character_health, character_attack, max_attack, max_health, max_hunger, max_speed, turn, turn_count, places, weapon, inventory
@@ -509,6 +552,7 @@ def main():
     --- eat: e                            ---
     --- rest: r                           ---
     --- continue: c                       ---
+    --- save and quit: q                  ---
     ---                                   ---
     -----------------------------------------      
         '''); print(''); time.sleep(1)
@@ -519,14 +563,17 @@ def main():
 
         # checks player enters a valid action
         while True:
-            if action == 'f' or action == 'e' or action == 'r' or action == 'c':
+            if action == 'f' or action == 'e' or action == 'r' or action == 'c' or action == 'q':
                 break
             else:
                 print(f'{action} is not a valid action'); print(''); time.sleep(0.5)
                 action = input('what would you like to do? '); print(''); time.sleep(0.5)
+        
+        if action == 'q':
+            save_data(info, inventory, turn, turn_count, character_attack, character_health, character_hunger, character_speed, max_attack, max_health, max_hunger, max_speed), print(info), quit
 
         # lets player find food
-        if action == 'f':
+        elif action == 'f':
             forage = randint(1,4)
             if forage == 1:
                 # food added to inventory if found
@@ -793,6 +840,6 @@ while playing:
         # end message
         print('---    THANK YOU FOR PLAYING:    ---'); print(''); time.sleep(1)
         print('---            THEM              ---'); print(''); time.sleep(1)
-        playing = False; info[1][1] = '1'; save_data(info); quit
+        playing = False; save_data(info, inventory, turn, turn_count, character_attack, character_health, character_hunger, character_speed, max_attack, max_health, max_hunger, max_speed); quit
     else:
         pass
