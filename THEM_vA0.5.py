@@ -32,16 +32,48 @@ places = {'h': 'hunting cabin      ', 'a': 'tree house         ', 's': 'barracks
 info = []
 with open("info.txt", 'r') as file: info = list(csv.reader(file))
 
+def load_saved_data():
+    global character_speed, character_hunger, character_health, character_attack, max_attack, max_health, max_hunger, max_speed, turn, turn_count, weapon, inventory, info
+    # setting global variables from saved data
+    try:
+        for i in range(len(info)):
+            if info[i][0] == 'inventory':
+                print(info[i])
+                inventory = info[i]
+                inventory.remove('inventory')
+            elif info[i][0] == 'character_health':
+                character_health = int(info[i][1])
+            elif info[i][0] == 'character_speed':
+                character_speed = int(info[i][1])
+            elif info[i][0] == 'character_hunger':
+                character_hunger = int(info[i][1])
+            elif info[i][0] == 'character_attack':
+                character_attack = int(info[i][1])
+            elif info[i][0] == 'max_health':
+                max_health = int(info[i][1])
+            elif info[i][0] == 'max_hunger':
+                max_hunger = int(info[i][1])
+            elif info[i][0] == 'max_speed':
+                max_speed = int(info[i][1])
+            elif info[i][0] == 'max_attack':
+                max_attack = int(info[i][1])
+            elif info[i][0] == 'turn':
+                turn = info[i][1]
+            elif info[i][0] == 'turn_count':
+                turn_count = int(info[i][1])
+    except:
+        print('insufficient data to load save'); print(''); time.sleep(0.5)
+        print('proceeding to new game'); print(''); time.sleep(0.5)
+
 # writing the list 'info' back into info.txt, to save data
 def save_data(info, inventory, turn, turn_count, character_attack, character_health, character_hunger, character_speed, max_attack, max_health, max_hunger, max_speed):
-
-
+    # adding all the global variables into the list 'info'
     for i in range(len(info)):
         if info[i][0] == 'inventory':
-            temp = [inventory]
+            temp = ['inventory']
             print(temp)
-            for i in range(len(inventory)):
-                temp.append(inventory[i])
+            for n in range(len(inventory)):
+                temp.append(inventory[n])
             print(temp)
             info[i] = (temp)
         elif info[i][0] == 'character_health':
@@ -249,7 +281,7 @@ def abandoned_village():
         # numerb of attacks determined by speed
         hits = randint(1, character_speed)
         for i in range(nomads, hits):
-            input('type . to attack! '); print(''); time.sleep(0.3)
+            input('press enter to attack! '); print(''); time.sleep(0.3)
         # number of nomads killed determined by number of hits and attack damage
         if hits > nomads and character_attack > 6:
             print('you managed to kill them all!'); print(''); time.sleep(0.5)
@@ -283,7 +315,7 @@ def radioactive_plains():
     # numebr of hits determined by speed
     hits = randint(5, character_speed)
     for i in range(1, hits):
-        input('type . to attack! '); print(''); time.sleep(0.3)
+        input('press enter to attack! '); print(''); time.sleep(0.3)
     # number of mutants killed determined by number of hits and attaack damage
     if hits > mutants and character_attack > 5:
         print('you managed to kill them all!'); print(''); time.sleep(0.5)
@@ -829,7 +861,13 @@ while playing:
     play = input('start game y/n '); print(''); time.sleep(0.5)
 
     if play == 'y':
-        inventory = [] # clear the inventory
+        load_save = input('load saved data? [WARNING: any data saved will be overwritten if a new game starts] y/n '); print(''); time.sleep(0.5)
+        # loading saved data
+        if load_save == 'y':
+            load_saved_data(); print('loading saved data'); print(''); time.sleep(0.5)
+        else:
+            print('starting new game'); print(''); time.sleep(0.5)
+            inventory = ['null'] # clear the inventory
         # loading game
         print('--- starting game ---'); print(''); time.sleep(0.5)
         for i in range(1,4):
