@@ -668,11 +668,11 @@ def main():
                 turn = input('you can go to the city(ci) or the archery range(ar)'); print(''); time.sleep(0.5)
                 # checks player enters a valid destination
                 while True:
-                    if turn == 'sr' or turn == 'ci':
+                    if turn == 'ar' or turn == 'ci':
                         break
                     else:
                         print(f'{turn} is not a valid destination'); print(''); time.sleep(0.5)
-                        turn = input('you can go to the city(ci) or the shooting range(sr)'); print(''); time.sleep(0.5)
+                        turn = input('you can go to the city(ci) or the archery range(ar)'); print(''); time.sleep(0.5)
 
             elif turn == 's':
                 # soldier starts in the barracks
