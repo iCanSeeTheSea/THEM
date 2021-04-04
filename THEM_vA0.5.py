@@ -65,16 +65,19 @@ def load_saved_data():
         print('insufficient data to load save'); print(''); time.sleep(0.5)
         print('proceeding to new game'); print(''); time.sleep(0.5)
 
+    print('DEBUG:', character_speed, character_hunger, character_health, character_attack, max_attack, max_health, max_hunger, max_speed, turn, turn_count, weapon, inventory)
+    print(info)
+
 # writing the list 'info' back into info.txt, to save data
-def save_data(info, inventory, turn, turn_count, character_attack, character_health, character_hunger, character_speed, max_attack, max_health, max_hunger, max_speed):
+def save_quit(info, inventory, turn, turn_count, character_attack, character_health, character_hunger, character_speed, max_attack, max_health, max_hunger, max_speed):
     # adding all the global variables into the list 'info'
     for i in range(len(info)):
         if info[i][0] == 'inventory':
             temp = ['inventory']
-            print(temp)
+            print('temp1:', temp)
             for n in range(len(inventory)):
                 temp.append(inventory[n])
-            print(temp)
+            print('temp2:', temp)
             info[i] = (temp)
         elif info[i][0] == 'character_health':
             temp = ['character_health', character_health]
@@ -107,11 +110,15 @@ def save_data(info, inventory, turn, turn_count, character_attack, character_hea
             temp = ['turn_count', turn_count]
             info[i] = (temp)
 
+    print(info)
 
     with open('info.txt', 'w', newline='') as file:
         info_writer = csv.writer(file)
         for i in range(len(info)):
             info_writer.writerow(info[i])
+
+    # exit program
+    quit
 
 if info[0][1] == '0':
     # introduction - runs when you start game for the first time
@@ -215,8 +222,8 @@ def game_start():
         else:
             print('... that\'s not a valid character.'); print(''); time.sleep(3)
 
-    # starting inventory
-    inventory.append(weapon)
+    # adding chosen weapon to inventory
+    inventory[0] = weapon
 
     # starting stats
     character_health = max_health
@@ -455,7 +462,7 @@ def desert():
         character_health = 0
         return('go')
     elif choice == 'r':
-        if character_speed > 10:
+        if character_speed > 9:
             # if character is fast enough, they outrun the hyenas
             print('you manage to out run the hyenas, and find yourself in the middle of a canyon'); print(''); time.sleep(0.5)
             print('you keep going, down the only path you can'); print(''); time.sleep(0.5)
@@ -565,7 +572,8 @@ def secret_ending():
 def main():
     global turn, character_attack, character_health, character_hunger, character_speed, turn_count, place, places
 
-    game_start()
+    if load_save == 'n':
+        game_start()
 
     # main game loop
     while character_health > 0: 
@@ -602,7 +610,7 @@ def main():
                 action = input('what would you like to do? '); print(''); time.sleep(0.5)
         
         if action == 'q':
-            save_data(info, inventory, turn, turn_count, character_attack, character_health, character_hunger, character_speed, max_attack, max_health, max_hunger, max_speed), print(info), quit
+            save_quit(info, inventory, turn, turn_count, character_attack, character_health, character_hunger, character_speed, max_attack, max_health, max_hunger, max_speed), print(info)
 
         # lets player find food
         elif action == 'f':
@@ -865,6 +873,9 @@ while playing:
         # loading saved data
         if load_save == 'y':
             load_saved_data(); print('loading saved data'); print(''); time.sleep(0.5)
+            print(inventory)
+            print(info)
+            print(character_health)
         else:
             print('starting new game'); print(''); time.sleep(0.5)
             inventory = ['null'] # clear the inventory
@@ -878,6 +889,6 @@ while playing:
         # end message
         print('---    THANK YOU FOR PLAYING:    ---'); print(''); time.sleep(1)
         print('---            THEM              ---'); print(''); time.sleep(1)
-        playing = False; save_data(info, inventory, turn, turn_count, character_attack, character_health, character_hunger, character_speed, max_attack, max_health, max_hunger, max_speed); quit
+        playing = False; save_quit(info, inventory, turn, turn_count, character_attack, character_health, character_hunger, character_speed, max_attack, max_health, max_hunger, max_speed)
     else:
         pass

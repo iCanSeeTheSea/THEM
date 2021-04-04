@@ -1,13 +1,13 @@
 intro,1
 test,null
-inventory
-"['axe', 'food', 'food', 'food']",axe,food,food,food
-character_speed,20
-character_hunger,14
-character_attack,15
-max_health,10
-max_hunger,15
-max_attack,15
-max_speed,20
-turn,av
-turn_count,6
+sword,food
+character_health,0
+character_speed,0
+character_hunger,0
+character_attack,0
+max_health,0
+max_hunger,0
+max_attack,0
+max_speed,0
+turn,null
+turn_count,0
