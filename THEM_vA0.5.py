@@ -35,35 +35,36 @@ with open("info.txt", 'r') as file: info = list(csv.reader(file))
 def load_saved_data():
     global character_speed, character_hunger, character_health, character_attack, max_attack, max_health, max_hunger, max_speed, turn, turn_count, weapon, inventory, info
     # setting global variables from saved data
-    try:
-        for i in range(len(info)):
-            if info[i][0] == 'inventory':
-                print(info[i])
-                inventory = info[i]
-                inventory.remove('inventory')
-            elif info[i][0] == 'character_health':
-                character_health = int(info[i][1])
-            elif info[i][0] == 'character_speed':
-                character_speed = int(info[i][1])
-            elif info[i][0] == 'character_hunger':
-                character_hunger = int(info[i][1])
-            elif info[i][0] == 'character_attack':
-                character_attack = int(info[i][1])
-            elif info[i][0] == 'max_health':
-                max_health = int(info[i][1])
-            elif info[i][0] == 'max_hunger':
-                max_hunger = int(info[i][1])
-            elif info[i][0] == 'max_speed':
-                max_speed = int(info[i][1])
-            elif info[i][0] == 'max_attack':
-                max_attack = int(info[i][1])
-            elif info[i][0] == 'turn':
-                turn = info[i][1]
-            elif info[i][0] == 'turn_count':
-                turn_count = int(info[i][1])
-    except:
-        print('insufficient data to load save'); print(''); time.sleep(0.5)
-        print('proceeding to new game'); print(''); time.sleep(0.5)
+    for i in range(len(info)):
+        if info[i][0] == 'inventory':
+            for n in range(len(info[i])):
+                # getting the invenotry data, without including 'inventory' at the start
+                if n == 0:
+                    pass
+                elif n == 1:
+                    inventory[0] = info[i][n]
+                else:
+                    inventory.append(info[i][n])
+        elif info[i][0] == 'character_health':
+            character_health = int(info[i][1])
+        elif info[i][0] == 'character_speed':
+            character_speed = int(info[i][1])
+        elif info[i][0] == 'character_hunger':
+            character_hunger = int(info[i][1])
+        elif info[i][0] == 'character_attack':
+            character_attack = int(info[i][1])
+        elif info[i][0] == 'max_health':
+            max_health = int(info[i][1])
+        elif info[i][0] == 'max_hunger':
+            max_hunger = int(info[i][1])
+        elif info[i][0] == 'max_speed':
+            max_speed = int(info[i][1])
+        elif info[i][0] == 'max_attack':
+            max_attack = int(info[i][1])
+        elif info[i][0] == 'turn':
+            turn = info[i][1]
+        elif info[i][0] == 'turn_count':
+            turn_count = int(info[i][1])
 
     print('DEBUG:', character_speed, character_hunger, character_health, character_attack, max_attack, max_health, max_hunger, max_speed, turn, turn_count, weapon, inventory)
     print(info)
@@ -118,7 +119,7 @@ def save_quit(info, inventory, turn, turn_count, character_attack, character_hea
             info_writer.writerow(info[i])
 
     # exit program
-    quit
+    playing = False
 
 if info[0][1] == '0':
     # introduction - runs when you start game for the first time
