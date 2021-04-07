@@ -1,6 +1,6 @@
-intro,1
+intro,0
 test,null
-sword,food
+inventory,null
 character_health,0
 character_speed,0
 character_hunger,0
