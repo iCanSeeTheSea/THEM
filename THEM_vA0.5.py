@@ -65,20 +65,17 @@ def load_saved_data():
             turn = info[i][1]
         elif info[i][0] == 'turn_count':
             turn_count = int(info[i][1])
-
-    print('DEBUG:', character_speed, character_hunger, character_health, character_attack, max_attack, max_health, max_hunger, max_speed, turn, turn_count, weapon, inventory)
-    print(info)
+    weapon = inventory[0]
 
 # writing the list 'info' back into info.txt, to save data
 def save_quit(info, inventory, turn, turn_count, character_attack, character_health, character_hunger, character_speed, max_attack, max_health, max_hunger, max_speed):
+    global playing
     # adding all the global variables into the list 'info'
     for i in range(len(info)):
         if info[i][0] == 'inventory':
             temp = ['inventory']
-            print('temp1:', temp)
             for n in range(len(inventory)):
                 temp.append(inventory[n])
-            print('temp2:', temp)
             info[i] = (temp)
         elif info[i][0] == 'character_health':
             temp = ['character_health', character_health]
@@ -111,14 +108,14 @@ def save_quit(info, inventory, turn, turn_count, character_attack, character_hea
             temp = ['turn_count', turn_count]
             info[i] = (temp)
 
-    print(info)
-
     with open('info.txt', 'w', newline='') as file:
         info_writer = csv.writer(file)
         for i in range(len(info)):
             info_writer.writerow(info[i])
 
     # exit program
+    print('---    THANK YOU FOR PLAYING:    ---'); print(''); time.sleep(1)
+    print('---            THEM              ---'); print(''); time.sleep(1)
     playing = False
 
 if info[0][1] == '0':
@@ -577,7 +574,7 @@ def main():
         game_start()
 
     # main game loop
-    while character_health > 0: 
+    while character_health > 0 and playing == True: 
         # keeps track of the turn
         place = places[turn]
 
@@ -611,7 +608,7 @@ def main():
                 action = input('what would you like to do? '); print(''); time.sleep(0.5)
         
         if action == 'q':
-            save_quit(info, inventory, turn, turn_count, character_attack, character_health, character_hunger, character_speed, max_attack, max_health, max_hunger, max_speed), print(info)
+            save_quit(info, inventory, turn, turn_count, character_attack, character_health, character_hunger, character_speed, max_attack, max_health, max_hunger, max_speed)
 
         # lets player find food
         elif action == 'f':
@@ -813,57 +810,58 @@ def main():
             if character_attack < 0:
                 character_attack = 0
         stats_to_0()
-        
-        # end of turn stats
-        print(f'end of turn {turn_count}. health: {character_health}, speed: {character_speed}, hunger: {character_hunger}, attack: {character_attack}, inventory: {inventory}'); print(''); time.sleep(1)
-        
-        # lose 1 hunger every 3 turns
-        if turn_count%3 == 0:
-            character_hunger -= 1
 
-        # character can increase stats, but loose hunger if hunger is high enough
-        if character_hunger > 8:
-            if character_health < max_health:
+        if playing is True:
+            # end of turn stats
+            print(f'end of turn {turn_count}. health: {character_health}, speed: {character_speed}, hunger: {character_hunger}, attack: {character_attack}, inventory: {inventory}'); print(''); time.sleep(1)
+            
+            # lose 1 hunger every 3 turns
+            if turn_count%3 == 0:
                 character_hunger -= 1
-                character_health += 1
-            if character_speed < max_speed:
-                character_hunger -= 1
-                character_speed += 1
-            if character_attack < max_attack:
-                character_hunger -= 1
-                character_attack += 1
 
-        # when character runs out of hunger, they loose other stats
-        elif character_hunger <= 0:
-            print('sooooooo hungry'); print(''); time.sleep(0.5)
-            character_health -= 1
-            character_speed -= 3
-            character_attack = 0
+            # character can increase stats, but loose hunger if hunger is high enough
+            if character_hunger > 8:
+                if character_health < max_health:
+                    character_hunger -= 1
+                    character_health += 1
+                if character_speed < max_speed:
+                    character_hunger -= 1
+                    character_speed += 1
+                if character_attack < max_attack:
+                    character_hunger -= 1
+                    character_attack += 1
 
-        # when character is running out of hunger, they loose other stats
-        elif character_hunger < 2:
-            character_speed -= 2
-            character_attack -= 2
+            # when character runs out of hunger, they loose other stats
+            elif character_hunger <= 0:
+                print('sooooooo hungry'); print(''); time.sleep(0.5)
+                character_health -= 1
+                character_speed -= 3
+                character_attack = 0
 
-        # when character starts to run out of hunger, they loose other stats     
-        elif character_hunger < 5:
-            character_speed -= 1
-            character_attack -= 1
-        
-        stats_to_0()
+            # when character is running out of hunger, they loose other stats
+            elif character_hunger < 2:
+                character_speed -= 2
+                character_attack -= 2
 
-        # game ends if character speed runs out
-        if character_speed <= 0:
-            print('so tired...'); print(''); time.sleep(0.5)
-            print('just gonna lie down here...'); print(''); time.sleep(1)
-            turn = 'go'
+            # when character starts to run out of hunger, they loose other stats     
+            elif character_hunger < 5:
+                character_speed -= 1
+                character_attack -= 1
+            
+            stats_to_0()
 
-        # game ends if character health runs out
-        if character_health <= 0:
-            turn = 'go'
-        
-        # end of turn
-        turn_count += 1 
+            # game ends if character speed runs out
+            if character_speed <= 0:
+                print('so tired...'); print(''); time.sleep(0.5)
+                print('just gonna lie down here...'); print(''); time.sleep(1)
+                turn = 'go'
+
+            # game ends if character health runs out
+            if character_health <= 0:
+                turn = 'go'
+            
+            # end of turn
+            turn_count += 1 
 
 while playing:
 
@@ -874,9 +872,6 @@ while playing:
         # loading saved data
         if load_save == 'y':
             load_saved_data(); print('loading saved data'); print(''); time.sleep(0.5)
-            print(inventory)
-            print(info)
-            print(character_health)
         else:
             print('starting new game'); print(''); time.sleep(0.5)
             inventory = ['null'] # clear the inventory
@@ -888,8 +883,6 @@ while playing:
         main()
     elif play == 'n':
         # end message
-        print('---    THANK YOU FOR PLAYING:    ---'); print(''); time.sleep(1)
-        print('---            THEM              ---'); print(''); time.sleep(1)
-        playing = False; save_quit(info, inventory, turn, turn_count, character_attack, character_health, character_hunger, character_speed, max_attack, max_health, max_hunger, max_speed)
+        save_quit(info, inventory, turn, turn_count, character_attack, character_health, character_hunger, character_speed, max_attack, max_health, max_hunger, max_speed)
     else:
         pass
