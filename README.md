@@ -8,7 +8,7 @@ To play the latest version, go to the releases section (right) and under assets,
 
 Further instructions will provided in the game
 
-For the game to work, you will need the latest version of python, which can be downloaded here: https://www.python.org/downloads/release/python-378/.
+For the game to work, you will need the latest version of python, which can be downloaded here: https://www.python.org/downloads/.
 
 Once you have both python and the game installed, choose open with python to play.
 
